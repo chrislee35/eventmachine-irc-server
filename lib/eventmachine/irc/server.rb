@@ -10,7 +10,7 @@ require_relative 'server/replies'
 include EventMachine::IRC::Replies
 
 def carp(message)
-  puts message
+  #puts message
 end
 
 module EventMachine
@@ -113,7 +113,7 @@ module EventMachine
     				#verify the connectivity of earlier guy
   					reply :numeric, ERR_NICKNAMEINUSE, "* #{nick} ", "Nickname is already in use."
   					@nick_tries += 1
-  					if @nick_tries > $config['nick-tries']
+  					if @nick_tries > Server.config['nick-tries']
   						carp "kicking spurious user #{nick} after #{@nick_tries} tries"
   						handle_abort
   					end
